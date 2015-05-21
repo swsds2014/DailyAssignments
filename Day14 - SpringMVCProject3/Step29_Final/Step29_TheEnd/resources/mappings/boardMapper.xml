@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.samsung.biz.board">
+	<select id="getBoardList" resultType="board">
+		select * from board 
+		<where>
+			<choose>
+				<when test="searchCondition == 'TITLE'">
+					title like '%'||#{searchKeyword}||'%'
+				</when>
+				<when test="searchCondition == 'CONTENT'">
+					content like '%'||#{searchKeyword}||'%'
+				</when>
+			</choose>
+		</where>
+		order by seq desc
+	</select>
+	
+	<select id="getBoard" resultType="board">
+		select * from board where seq=#{seq}
+	</select>
+	
+	<insert id="addBoard" parameterType="board">
+		insert into board(seq, title, nickname, content, userid)
+		values((select nvl(max(seq), 0)+1 from board), #{title} , #{nickname} , #{content}, 'guest')
+	</insert>
+	
+	<update id="updateBoard" parameterType="board">
+		update board set title=#{title}, content=#{content} where seq=#{seq}
+	</update>
+
+	<delete id="deleteBoard" parameterType="board">
+		delete from board where seq=#{seq}
+	</delete>
+
+</mapper>

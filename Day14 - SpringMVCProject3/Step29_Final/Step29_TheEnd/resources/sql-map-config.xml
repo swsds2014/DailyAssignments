@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.samsung.biz.board.vo.BoardVO" alias="board"/>
+		<typeAlias type="com.samsung.biz.user.vo.UserVO" alias="user"/>
+		
+	</typeAliases>
+	
+	<!-- business-layer.xml에서 필요한 정보는 다 올렸음 -->
+	
+	<mappers>
+		<mapper resource="mappings/boardMapper.xml"/>
+		<mapper resource="mappings/userMapper.xml"/>
+	</mappers>
+	
+</configuration>
